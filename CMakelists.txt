@@ -1,0 +1,6 @@
+cmake_minimum_required (VERSION 2.8)
+project (Simple_Snake)
+
+add_executable(Simple_Snake
+		src/game.cpp
+		)
