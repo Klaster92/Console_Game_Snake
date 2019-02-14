@@ -3,4 +3,6 @@ project (Simple_Snake)
 
 add_executable(Simple_Snake
 		src/game.cpp
+		src/ConsoleGameBase.cpp
+		src/ConsoleGameSnake.cpp
 		)
