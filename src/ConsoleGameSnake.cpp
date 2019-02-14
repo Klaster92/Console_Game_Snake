@@ -7,6 +7,7 @@
 ConsoleGameSnake::ConsoleGameSnake() {
 	width = 40;
 	height = 20;
+	nTail = 0;
 	}
 ConsoleGameSnake::~ConsoleGameSnake() {}
 
@@ -82,7 +83,7 @@ bool ConsoleGameSnake::Input() {
 	return true;}
 
 bool ConsoleGameSnake::Logic() {
-		int prevX = tailX[0];
+	int prevX = tailX[0];
 	int prevY = tailY[0];
 	int prev2X, prev2Y;
 	tailX[0] = x;
