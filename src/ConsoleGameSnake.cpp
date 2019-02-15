@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <conio.h>
+#include <ctime>
 
 
 ConsoleGameSnake::ConsoleGameSnake() {
 	width = 40;
 	height = 20;
-	//nTail = 0;
 	}
 ConsoleGameSnake::~ConsoleGameSnake() {}
 
@@ -16,8 +16,11 @@ bool ConsoleGameSnake::Setup() {
 	dir = STOP;
 	x = width / 2 - 1;
 	y = height / 2 - 1;
-	fruitX = rand() % width;
-	fruitY = rand() % height;
+	std::time_t currentTime = time(0);
+	srand(currentTime);
+	int computerNumber = rand();
+	fruitX = rand() % (width - 1);
+	fruitY = rand() % (height - 1);
 	score = 0;
 	return true;}
 
