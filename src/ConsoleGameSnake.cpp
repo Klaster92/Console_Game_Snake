@@ -7,7 +7,7 @@
 ConsoleGameSnake::ConsoleGameSnake() {
 	width = 40;
 	height = 20;
-	nTail = 0;
+	//nTail = 0;
 	}
 ConsoleGameSnake::~ConsoleGameSnake() {}
 
@@ -24,19 +24,19 @@ bool ConsoleGameSnake::Setup() {
 bool ConsoleGameSnake::Draw() {
 		system("cls"); // system("clear") for linux
 	for (int i = 0; i < width + 1; ++i) {
-		std::cout << "#";
+		std::cout << "\xB2";
 	}
 	std::cout << std::endl;
 	for (int i = 0; i < height; ++i) {
 		for (int j = 0; j < width; ++j) {
 			if (j == 0 || j == width - 1) {
-				std::cout << "#";
+				std::cout << "\xB2";
 			}
 			if (i == y && j == x) {
 				std::cout << "0";
 			}
 			else if (i == fruitY && j == fruitX) {
-				std::cout << "8";
+				std::cout << "\xE0";
 			}
 			else {
 				bool print = false;
@@ -54,7 +54,7 @@ bool ConsoleGameSnake::Draw() {
 		std::cout << std::endl;
 	}
 	for (int i = 0; i < width + 1; ++i) {
-		std::cout << "#";
+		std::cout << "\xB2";
 	}
 	std::cout << std::endl;
 	std::cout << "Score: " << score << std::endl;
