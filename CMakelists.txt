@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.8)
-project (Simple_Snake)
+project (Console_Game_Snake)
 
-add_executable(Simple_Snake
+add_executable(Console_Game_Snake
 		src/game.cpp
 		src/ConsoleGameBase.cpp
 		src/ConsoleGameSnake.cpp
