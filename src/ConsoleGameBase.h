@@ -6,12 +6,16 @@ public:
 	ConsoleGameBase();
 	virtual ~ConsoleGameBase();
 	
-	virtual bool Setup() = 0;
+	virtual bool Setup(int w, int h);
 	virtual bool Draw() = 0;
 	virtual bool Input() = 0;
 	virtual bool Logic() = 0;
+
 	
 	bool GameOver() const;
-	bool gameOver;
+	bool game_over_;
+
+	int width_;
+	int height_;
 };
 #endif

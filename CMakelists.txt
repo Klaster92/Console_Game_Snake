@@ -5,4 +5,5 @@ add_executable(Console_Game_Snake
 		src/game.cpp
 		src/ConsoleGameBase.cpp
 		src/ConsoleGameSnake.cpp
+		src/ConsoleGamePong/ConsoleGamePong.cpp
 		)
