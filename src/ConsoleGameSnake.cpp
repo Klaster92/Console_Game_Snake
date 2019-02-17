@@ -24,7 +24,8 @@ bool ConsoleGameSnake::Setup(int w, int h) {
 	return true;}
 
 bool ConsoleGameSnake::Draw() {
-		system("cls"); // system("clear") for linux
+	system("cls"); 
+
 	for (int i = 0; i < width_ + 1; ++i) {
 		std::cout << "\xB2";
 	}
@@ -114,9 +115,10 @@ bool ConsoleGameSnake::Logic() {
 		break;
 	}
 
-	/*if (x > width || x < 0 || y > height || y < 0) {   //code for strong wall
-		gameOver = true;
+	/*if (x_ > width_ || x_ < 0 || y_ > height_ || y_ < 0) {  //for Strong walls
+		game_over_ = true;
 	}*/
+
 	if (x_ >= width_ - 1) {
 		x_ = 0;
 	}

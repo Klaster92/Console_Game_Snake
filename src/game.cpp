@@ -20,7 +20,7 @@ bool CheckUserInput(const std::string& check) {
 int main() {
 	std::shared_ptr<ConsoleGameBase> gameptr = nullptr;
 	while (true) {
-		std::cout << "Type game number. Aviable games:\n\t1. Snake\n\t2. Pong" << std::endl;
+		std::cout << "Type game number. Aviable games:\n\t1. Snake\n\t2. Pong\n\t3. Settings" << std::endl;
 		std::string userInput;
 		std::getline(std::cin, userInput);
 		if (CheckUserInput(userInput)) {
@@ -35,6 +35,7 @@ int main() {
 				std::cout << "Incorrect game number. Try again." << std::endl;
 				continue;
 			}
+
 			gameptr->Setup(40, 20);
 			while (!gameptr->GameOver()) {
 				gameptr->Draw();
