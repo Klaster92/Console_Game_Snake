@@ -13,7 +13,13 @@ ConsoleGameSnake::~ConsoleGameSnake() {}
 
 bool ConsoleGameSnake::Control() {
   std::cout << " w - up, s - down, a - left, d - right, x - exit to menu.\n Press any key to continue." << std::endl;
+#ifdef _WIN32
   char current = _getch();
+#else
+#ifdef __linux__
+  char current = static_cast<char>(getchar());
+#endif
+#endif
   return true;
 }
 bool ConsoleGameSnake::Setup(int w, int h) {

@@ -124,7 +124,13 @@ ConsoleGamePong::~ConsoleGamePong() {}
 
 bool ConsoleGamePong::Control() {
 	std::cout << " 1Player: w - up, s - down.\n 2Player: i - up, k - down.\n x - exit to menu.\n Press any key to continue." << std::endl;
+#ifdef _WIN32
 	char current = _getch();
+#else
+#ifdef __linux__
+	char current = static_cast<char>(getchar());
+#endif
+#endif
 	return true;
 }
 
