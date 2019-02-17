@@ -38,8 +38,8 @@ int main() {
         std::cout << "Incorrect game number. Try again." << std::endl;
         continue;
       }
-
-      gameptr->Setup(40, 20);
+	  gameptr->Control();
+      gameptr->Setup(40,20);
       while (!gameptr->GameOver()) {
         gameptr->Draw();
         gameptr->Input();

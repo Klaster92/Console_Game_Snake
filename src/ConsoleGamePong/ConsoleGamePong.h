@@ -53,6 +53,7 @@ class ConsoleGamePong : public ConsoleGameBase {
   ConsoleGamePong();
   virtual ~ConsoleGamePong();
 
+  virtual bool Control();
   virtual bool Setup(int w, int h);
   virtual bool Draw();
   virtual bool Input();

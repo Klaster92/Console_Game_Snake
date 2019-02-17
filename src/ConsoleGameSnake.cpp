@@ -11,6 +11,11 @@
 ConsoleGameSnake::ConsoleGameSnake() {}
 ConsoleGameSnake::~ConsoleGameSnake() {}
 
+bool ConsoleGameSnake::Control() {
+  std::cout << " w - up, s - down, a - left, d - right, x - exit to menu.\n Press any key to continue." << std::endl;
+  char current = _getch();
+  return true;
+}
 bool ConsoleGameSnake::Setup(int w, int h) {
   ConsoleGameBase::Setup(w, h);
 

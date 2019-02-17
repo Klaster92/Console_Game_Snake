@@ -15,6 +15,7 @@ public:
 	virtual bool Draw() = 0;
 	virtual bool Input() = 0;
 	virtual bool Logic() = 0;
+	virtual bool Control() = 0;
 
 	bool GameOver() const;
 	bool game_over_;
