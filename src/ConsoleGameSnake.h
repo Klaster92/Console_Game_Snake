@@ -3,6 +3,7 @@
 
 #include "ConsoleGameBase.h"
 
+//#define STRONG_WALL
 
 class ConsoleGameSnake : public ConsoleGameBase {
 public:

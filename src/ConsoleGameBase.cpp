@@ -1,7 +1,28 @@
 #include "ConsoleGameBase.h"
 
-ConsoleGameBase::ConsoleGameBase(): width_(0), height_(0) {}
-ConsoleGameBase::~ConsoleGameBase(){}
+#ifdef __linux__
+#include <sys/ioctl.h>
+#include <termios.h>
+
+bool _kbhit() {
+	termios term;
+	tcgetattr(0, &term);
+
+	termios term2 = term;
+	term2.c_lflag &= ~ICANON;
+	tcsetattr(0, TCSANOW, &term2);
+
+	int byteswaiting;
+	ioctl(0, FIONREAD, &byteswaiting);
+
+	tcsetattr(0, TCSANOW, &term);
+
+	return byteswaiting > 0;
+}
+#endif
+
+ConsoleGameBase::ConsoleGameBase() : width_(0), height_(0) {}
+ConsoleGameBase::~ConsoleGameBase() {}
 
 bool ConsoleGameBase::Setup(int w, int h) {
 	width_ = w;
@@ -10,5 +31,5 @@ bool ConsoleGameBase::Setup(int w, int h) {
 }
 
 bool ConsoleGameBase::GameOver() const {
-	return game_over_; 
+  return game_over_;
 }
