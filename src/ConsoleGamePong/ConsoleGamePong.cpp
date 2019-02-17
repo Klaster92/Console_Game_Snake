@@ -1,9 +1,9 @@
 #include "ConsoleGamePong.h"
 
-#include <chrono>
-#include <thread>
 #include <time.h>
+#include <chrono>
 #include <iostream>
+#include <thread>
 #ifdef _WIN32
 #include <conio.h>
 #endif
@@ -134,7 +134,7 @@ bool ConsoleGamePong::Setup(int w, int h) {
   player1_ptr_->Setup(1, h / 2 - 3);
   player2_ptr_->Setup(w - 2, h / 2 - 3);
 
-  srand(time(NULL));
+  srand(static_cast<unsigned int>(time(nullptr)));
   game_over_ = false;
   up1_ = 'w';
   up2_ = 'i';
@@ -214,39 +214,32 @@ bool ConsoleGamePong::Draw() {
 bool ConsoleGamePong::Input() {
   ball_ptr_->Move();
 
-  int ballx = ball_ptr_->GetX();
-  int bally = ball_ptr_->GetY();
-  int player1x = player1_ptr_->GetX();
-  int player2x = player2_ptr_->GetX();
-  int player1y = player1_ptr_->GetY();
-  int player2y = player2_ptr_->GetY();
-
   if (_kbhit()) {
 #ifdef _WIN32
     char current = _getch();
 #else
 #ifdef __linux__
-    char current = getchar();
+    char current = static_cast<char>(getchar());
 #endif
 #endif
 
     if (current == up1_) {
-      if (player1y > 0) {
+      if (player1_ptr_->GetY() > 0) {
         player1_ptr_->MoveUp();
       }
     }
     if (current == up2_) {
-      if (player2y > 0) {
+      if (player2_ptr_->GetY() > 0) {
         player2_ptr_->MoveUp();
       }
     }
     if (current == down1_) {
-      if (player1y + 4 < height_) {
+      if (player1_ptr_->GetY() + 4 < height_) {
         player1_ptr_->MoveDown();
       }
     }
     if (current == down2_) {
-      if (player2y + 4 < height_) {
+      if (player2_ptr_->GetY() + 4 < height_) {
         player2_ptr_->MoveDown();
       }
     }
@@ -266,7 +259,7 @@ bool ConsoleGamePong::Logic() {
   for (int i = 0; i < 4; i++) {
     if (ball_ptr_->GetX() == player1_ptr_->GetX() + 1) {
       if (ball_ptr_->GetY() == player1_ptr_->GetY() + i) {
-        ball_ptr_->ChangeDirection((eDir)((rand() % 3) + 4));
+        ball_ptr_->ChangeDirection(static_cast<eDir>((rand() % 3) + 4));
       }
     }
   }
@@ -274,7 +267,7 @@ bool ConsoleGamePong::Logic() {
   for (int i = 0; i < 4; i++) {
     if (ball_ptr_->GetX() == player2_ptr_->GetX() - 1) {
       if (ball_ptr_->GetY() == player2_ptr_->GetY() + i) {
-        ball_ptr_->ChangeDirection((eDir)((rand() % 3) + 1));
+        ball_ptr_->ChangeDirection(static_cast<eDir>((rand() % 3) + 1));
       }
     }
   }

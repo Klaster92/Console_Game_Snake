@@ -1,8 +1,8 @@
 #include "ConsoleGameSnake.h"
 
 #include <chrono>
-#include <thread>
 #include <iostream>
+#include <thread>
 #ifdef _WIN32
 #include <conio.h>
 #endif
@@ -18,8 +18,8 @@ bool ConsoleGameSnake::Setup(int w, int h) {
   dir_ = STOP;
   x_ = width_ / 2 - 1;
   y_ = height_ / 2 - 1;
-  std::time_t current_time = time(0);
-  srand(current_time);
+  std::time_t current_time = time(nullptr);
+  srand(static_cast<unsigned int>(current_time));
   fruit_x_ = rand() % (width_ - 2);
   fruit_y_ = rand() % (height_ - 2);
   score_ = 0;
@@ -128,6 +128,8 @@ bool ConsoleGameSnake::Logic() {
     case DOWN:
       y_++;
       break;
+    default:
+      break;
   }
 
 #ifdef STRONG_WALL
@@ -152,10 +154,10 @@ bool ConsoleGameSnake::Logic() {
   }
   if (x_ == fruit_x_ && y_ == fruit_y_) {
     score_ += 10;
-    std::time_t current_time = time(0);
-    srand(current_time);
-    fruit_x_ = rand() % width_;
-    fruit_y_ = rand() % height_;
+    std::time_t current_time = time(nullptr);
+    srand(static_cast<unsigned char>(current_time));
+    fruit_x_ = 1 + rand() % (width_ - 2);
+    fruit_y_ = 1 + rand() % (height_ - 2);
     n_tail_++;
   }
   return true;
