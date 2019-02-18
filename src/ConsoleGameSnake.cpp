@@ -93,16 +93,24 @@ bool ConsoleGameSnake::Input() {
 #endif
 #endif
       case 'a':
-        dir_ = LEFT;
+		  if (dir_ != eDirection::RIGHT) {
+			  dir_ = eDirection::LEFT;
+		  }
         break;
       case 'd':
-        dir_ = RIGHT;
+		  if (dir_ != eDirection::LEFT) {
+			  dir_ = eDirection::RIGHT;
+		  }
         break;
       case 'w':
-        dir_ = UP;
+		  if (dir_ != eDirection::DOWN) {
+			  dir_ = eDirection::UP;
+		  }
         break;
       case 's':
-        dir_ = DOWN;
+		  if (dir_ != eDirection::UP) {
+			  dir_ = eDirection::DOWN;
+		  }
         break;
       case 'x':
         game_over_ = true;
