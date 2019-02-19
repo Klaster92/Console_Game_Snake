@@ -9,7 +9,25 @@
 
 struct TailSegment {
 public:
+  TailSegment();
+  virtual ~TailSegment();
+
 	int x, y;
+};
+
+class Fruits {
+public:
+  Fruits();
+  virtual ~Fruits();
+
+  void Generate(int w, int h);
+  int Get_x_();
+  int Get_y_();
+  void Draw();
+
+private:
+  int x_, y_;
+
 };
 
 class ConsoleGameSnake : public ConsoleGameBase {
@@ -24,7 +42,8 @@ public:
 	virtual bool Logic();
 	
 private:
-	int x_, y_, fruit_x_, fruit_y_, score_;
+	int x_, y_, score_;
+  Fruits apple;
 	std::list <TailSegment> tail_;
 	enum eDirection { STOP = 0, LEFT, RIGHT, UP, DOWN };
 	eDirection dir_;

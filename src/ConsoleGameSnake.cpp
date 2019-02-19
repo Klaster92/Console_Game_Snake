@@ -8,6 +8,30 @@
 #endif
 #include <ctime>
 
+TailSegment::TailSegment() {}
+TailSegment::~TailSegment() {}
+
+Fruits::Fruits() {}
+Fruits::~Fruits() {}
+
+void Fruits::Generate(int w, int h) {
+  std::time_t current_time = time(nullptr);
+  srand(static_cast<unsigned int>(current_time));
+  x_ = rand() % (w - 2);
+  y_ = rand() % (h - 2);
+}
+int Fruits::Get_x_() {
+  return x_;
+}
+int Fruits::Get_y_() {
+  return y_;
+}
+void Fruits::Draw() {
+  std::cout << "O";
+}
+
+
+
 ConsoleGameSnake::ConsoleGameSnake() {}
 ConsoleGameSnake::~ConsoleGameSnake() {}
 
@@ -29,10 +53,7 @@ bool ConsoleGameSnake::Setup(int w, int h) {
   dir_ = STOP;
   x_ = width_ / 2 - 1;
   y_ = height_ / 2 - 1;
-  std::time_t current_time = time(nullptr);
-  srand(static_cast<unsigned int>(current_time));
-  fruit_x_ = rand() % (width_ - 2);
-  fruit_y_ = rand() % (height_ - 2);
+  apple.Generate(width_, height_);
   score_ = 0;
   return true;
 }
@@ -56,8 +77,8 @@ bool ConsoleGameSnake::Draw() {
       }
       if (i == y_ && j == x_) {
         std::cout << "0";
-      } else if (i == fruit_y_ && j == fruit_x_) {
-        std::cout << "\xE0";
+      } else if (i == apple.Get_y_() && j == apple.Get_x_()) {
+        apple.Draw();
       } else {
         bool print = false;
 		for (auto it = tail_.begin(); it != tail_.end(); ++it) {
@@ -170,12 +191,9 @@ bool ConsoleGameSnake::Logic() {
     }
   }
   //check fruit
-  if (x_ == fruit_x_ && y_ == fruit_y_) {
+  if (x_ == apple.Get_x_() && y_ == apple.Get_y_()) {
     score_ += 10;
-    std::time_t current_time = time(nullptr);
-    srand(static_cast<unsigned char>(current_time));
-    fruit_x_ = 1 + rand() % (width_ - 2);
-    fruit_y_ = 1 + rand() % (height_ - 2);
+    apple.Generate(width_,height_);
   }
   else {
     if (!tail_.empty()) {
