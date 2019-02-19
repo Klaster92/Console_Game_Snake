@@ -34,7 +34,6 @@ bool ConsoleGameSnake::Setup(int w, int h) {
   fruit_x_ = rand() % (width_ - 2);
   fruit_y_ = rand() % (height_ - 2);
   score_ = 0;
-  n_tail_ = 0;
   return true;
 }
 
@@ -61,12 +60,13 @@ bool ConsoleGameSnake::Draw() {
         std::cout << "\xE0";
       } else {
         bool print = false;
-        for (int k = 0; k < n_tail_; ++k) {
-          if (tail_x_[k] == j && tail_y_[k] == i) {
-            print = true;
-            std::cout << "o";
-          }
-        }
+		for (auto it = tail_.begin(); it != tail_.end(); ++it) {
+			if (it->x == j && it->y == i) {
+				print = true;
+				std::cout << "o";
+				break;
+			}
+		}
         if (!print) {
           std::cout << " ";
         }
@@ -121,36 +121,33 @@ bool ConsoleGameSnake::Input() {
 }
 
 bool ConsoleGameSnake::Logic() {
-  int prev_x = tail_x_[0];
-  int prev_y = tail_y_[0];
-  int prev_2x, prev_2y;
-  tail_x_[0] = x_;
-  tail_y_[0] = y_;
-  for (int i = 1; i < n_tail_; ++i) {
-    prev_2x = tail_x_[i];
-    prev_2y = tail_y_[i];
-    tail_x_[i] = prev_x;
-    tail_y_[i] = prev_y;
-    prev_x = prev_2x;
-    prev_y = prev_2y;
-  }
+  // insert new tail segment
+  TailSegment prev_head;
+  prev_head.x = x_;
+  prev_head.y = y_;
+  
+  // move head
   switch (dir_) {
     case LEFT:
       x_--;
+      tail_.push_front(prev_head);
       break;
     case RIGHT:
       x_++;
+      tail_.push_front(prev_head);
       break;
     case UP:
       y_--;
+      tail_.push_front(prev_head);
       break;
     case DOWN:
       y_++;
+      tail_.push_front(prev_head);
       break;
     default:
       break;
   }
-
+  //check wall
 #ifdef STRONG_WALL
   if (x_ > width_ || x_ < 0 || y_ > height_ || y_ < 0) {
     game_over_ = true;
@@ -166,18 +163,24 @@ bool ConsoleGameSnake::Logic() {
   } else if (y_ < 0) {
     y_ = height_ - 1;
   }
-  for (int i = 0; i < n_tail_; ++i) {
-    if (tail_x_[i] == x_ && tail_y_[i] == y_) {
+  //check yourself
+  for (auto it = tail_.begin(); it != tail_.end(); ++it) {
+    if (it->x == x_ && it->y == y_) {
       game_over_ = true;
     }
   }
+  //check fruit
   if (x_ == fruit_x_ && y_ == fruit_y_) {
     score_ += 10;
     std::time_t current_time = time(nullptr);
     srand(static_cast<unsigned char>(current_time));
     fruit_x_ = 1 + rand() % (width_ - 2);
     fruit_y_ = 1 + rand() % (height_ - 2);
-    n_tail_++;
+  }
+  else {
+    if (!tail_.empty()) {
+      tail_.pop_back();
+    }
   }
   return true;
 }
