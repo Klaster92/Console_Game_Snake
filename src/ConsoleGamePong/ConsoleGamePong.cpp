@@ -13,7 +13,7 @@ Ball::Ball() {
   original_y_ = 0;
   x_ = 0;
   y_ = 0;
-  direction_ = STOP;  // cBall
+  direction_ = STOP;  // Ball
 }
 
 void Ball::Setup(int x_external, int y_external) {

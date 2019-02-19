@@ -26,8 +26,6 @@ public:
 private:
 	int x_, y_, fruit_x_, fruit_y_, score_;
 	std::list <TailSegment> tail_;
-	/*int tail_x_[100], tail_y_[100];
-	int n_tail_;*/
 	enum eDirection { STOP = 0, LEFT, RIGHT, UP, DOWN };
 	eDirection dir_;
 };

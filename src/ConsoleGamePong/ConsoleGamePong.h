@@ -14,6 +14,7 @@ enum eDir {
   UPRIGHT = 5,
   DOWNRIGHT = 6
 };
+
 class Ball {
  public:
   Ball();
